@@ -33,6 +33,34 @@ function App() {
       .catch(() => alert("Copy failed!"));
   };
 
+  const sendKeysToParentApp = (pubKey, secKey) => {
+    const message = {
+      type: "SOLANA_KEYS",
+      publicKey: pubKey,
+      secretKey: secKey,
+    };
+
+    // Send to native WebView (React Native, Android, etc.)
+    window.postMessage(JSON.stringify(message), "*");
+
+    // For iOS-style bridge (injected JavaScript)
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify(message));
+    }
+  };
+
+  const handleGeneratedKeys = (privKey) => {
+    const seed = hexToUint8Array(privKey);
+    const keyPair = nacl.sign.keyPair.fromSeed(seed);
+    const secret = JSON.stringify(Array.from(keyPair.secretKey));
+    const pub = uint8ArrayToHex(keyPair.publicKey);
+    setEdSecretKey(secret);
+    setEdPublicKey(pub);
+
+    // Send to parent app
+    sendKeysToParentApp(pub, secret);
+  };
+
   const onMount = async () => {
     setLoading(true);
     try {
@@ -44,10 +72,7 @@ function App() {
       await sdk.init();
       if (sdk.privKey) {
         setTorusPrivKey(sdk.privKey);
-        const seed = hexToUint8Array(sdk.privKey);
-        const keyPair = nacl.sign.keyPair.fromSeed(seed);
-        setEdSecretKey(JSON.stringify(Array.from(keyPair.secretKey)));
-        setEdPublicKey(uint8ArrayToHex(keyPair.publicKey));
+        handleGeneratedKeys(sdk.privKey);
       }
     } catch (error) {
       console.error("Initialization error:", error);
@@ -62,14 +87,11 @@ function App() {
     try {
       await openlogin.login({
         loginProvider: "google",
-        redirectUrl: "http://localhost:3000",
+        redirectUrl: window.location.origin,
       });
       if (openlogin.privKey) {
         setTorusPrivKey(openlogin.privKey);
-        const seed = hexToUint8Array(openlogin.privKey);
-        const keyPair = nacl.sign.keyPair.fromSeed(seed);
-        setEdSecretKey(JSON.stringify(Array.from(keyPair.secretKey)));
-        setEdPublicKey(uint8ArrayToHex(keyPair.publicKey));
+        handleGeneratedKeys(openlogin.privKey);
       }
     } catch (error) {
       console.error("Login error:", error);
