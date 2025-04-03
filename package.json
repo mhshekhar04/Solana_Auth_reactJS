@@ -7,8 +7,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-server" :	"npx pm2 start npm --name 'defi-pred-front' -- run dev",
-    "stop-server"	: "npx pm2 stop 'defi-pred-front' && npx pm2 delete 'defi-pred-front'"
+    "start-server": "npx pm2 start 'npx serve -s build -l 3003' --name 'open-login-front'",
+    "stop-server": "npx pm2 stop open-login-front && npx pm2 delete open-login-front"
   },
   "browserslist": {
     "production": [
@@ -36,6 +36,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
+    "serve": "^14.2.4",
     "tweetnacl": "^1.0.3",
     "web-vitals": "^1.1.1"
   },
