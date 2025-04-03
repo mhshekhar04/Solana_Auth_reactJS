@@ -1,0 +1,138 @@
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html,
+#root {
+  height: 100%;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #2b5876, #4e4376);
+  color: #fff;
+}
+
+/* Center the app */
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Loading Screen */
+.loading-screen {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+/* Login Page */
+.login-container,
+.wallet-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.login-card,
+.wallet-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.login-card h1,
+.wallet-header h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.login-card p {
+  margin-bottom: 30px;
+  font-size: 1em;
+  color: #eee;
+}
+
+.login-button,
+.logout-button,
+.wallet-actions button,
+.key-display button {
+  background-color: #61dafb;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 1em;
+  cursor: pointer;
+  color: #000;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.login-button:hover,
+.logout-button:hover,
+.wallet-actions button:hover,
+.key-display button:hover {
+  background-color: #52c7ea;
+}
+
+/* Wallet Header */
+.wallet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Key Display */
+.key-display {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-family: monospace;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Scrollable Key for Mobile */
+.scrollable-key {
+  max-height: 180px;
+  overflow: auto;
+  word-break: break-word;
+}
+
+/* Code Styling */
+code {
+  white-space: pre-wrap;
+  font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .login-card,
+  .wallet-card {
+    padding: 20px;
+  }
+
+  .login-button,
+  .logout-button,
+  .wallet-actions button,
+  .key-display button {
+    padding: 10px 12px;
+    font-size: 0.9em;
+  }
+
+  .wallet-header h1 {
+    font-size: 1.4em;
+  }
+}
