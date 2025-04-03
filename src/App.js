@@ -87,7 +87,7 @@ function App() {
     try {
       await openlogin.login({
         loginProvider: "google",
-        redirectUrl: window.location.origin,
+        redirectUrl: "https://solana-auth-react-js.vercel.app",
       });
       if (openlogin.privKey) {
         setTorusPrivKey(openlogin.privKey);
