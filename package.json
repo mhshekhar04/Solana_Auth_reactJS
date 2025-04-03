@@ -6,7 +6,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-server" :	"npx pm2 start npm --name 'defi-pred-front' -- run dev",
+    "stop-server"	: "npx pm2 stop 'defi-pred-front' && npx pm2 delete 'defi-pred-front'"
   },
   "browserslist": {
     "production": [
@@ -30,6 +32,7 @@
     "@babel/runtime": "^7.13.17",
     "@toruslabs/eccrypto": "^6.0.2",
     "@toruslabs/openlogin": "^0.7.4",
+    "pm2": "^6.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
